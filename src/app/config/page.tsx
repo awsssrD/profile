@@ -1,27 +1,28 @@
 import { type Metadata } from 'next'
-import { allBlogs } from 'content-collections'
+import { allConfigs } from 'content-collections'
 import Link from 'next/link'
 import count from 'word-count'
 import { config } from '@/lib/config'
+import { getDateFormat } from '@/lib/utils'
 
 export const metadata: Metadata = {
-  title: `Blogs | ${config.site.title}`,
-  description: `Blogs of ${config.site.title}`,
-  keywords: `${config.site.title}, blogs, ${config.site.title} blogs, nextjs blog template`
+  title: `Configs | ${config.site.title}`,
+  description: `Configs of ${config.site.title}`,
+  keywords: `${config.site.title}, Configs, ${config.site.title} Configs, nextjs blog template`
 }
 
 export default function BlogPage() {
-  const blogs = allBlogs.sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime())
-
+  const configs = allConfigs.sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  getDateFormat()
   return (
     <div className='max-w-3xl mx-auto px-4 py-8'>
       <div className='space-y-8'>
-        {blogs.map((blog: any) => (
+        {configs.map((blog: any) => (
           <article
             key={blog.slug}
             className=''
           >
-            <Link href={`/blog/${blog.slug}`}>
+            <Link href={`/config/${blog.slug}`}>
               <div className='flex flex-col space-y-2'>
                 <div className='flex items-center justify-between'>
                   <h2 className='text-xl font-semibold underline underline-offset-4'>{blog.title}</h2>
